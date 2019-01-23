@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace logger_functie
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            logger(false, "een comment hier");
+        }
+        public static void logger(Boolean dev,string message)
+        {
+            if(dev == true)
+            {
+                Console.Write("[dev] " + message);
+                Console.ReadLine();
+            }
+            if(dev == false)
+            {
+                Console.WriteLine(message);
+                Console.ReadLine();
+            }
+            else
+            {
+                StackFrame stackFrame = new System.Diagnostics.StackTrace(1).GetFrame(1);
+                string fileName = stackFrame.GetFileName();
+                string methodName = stackFrame.GetMethod().ToString();
+                int lineNumber = stackFrame.GetFileLineNumber();
+                string lijnstring = lineNumber.ToString();
+                Console.WriteLine("er is een error opgetreden op lijn" + lijnstring);
+                Console.ReadLine();
+
+            }
+
+        }
+    }
+}
